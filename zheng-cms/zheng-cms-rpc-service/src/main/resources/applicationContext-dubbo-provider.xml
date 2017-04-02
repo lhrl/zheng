@@ -11,7 +11,7 @@
 
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
-    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="dubbo" port="20882"/>
 
     <!-- 文章 -->
     <bean id="cmsArticleServiceImpl" class="com.zheng.cms.rpc.service.impl.CmsArticleServiceImpl"/>
@@ -28,6 +28,22 @@
     <!-- 标签 -->
     <bean id="cmsTagServiceImpl" class="com.zheng.cms.rpc.service.impl.CmsTagServiceImpl"/>
     <dubbo:service interface="com.zheng.cms.rpc.api.CmsTagService" ref="cmsTagServiceImpl" timeout="10000"/>
+
+    <!-- 专题 -->
+    <bean id="cmsTopicImpl" class="com.zheng.cms.rpc.service.impl.CmsTopicServiceImpl"/>
+    <dubbo:service interface="com.zheng.cms.rpc.api.CmsTopicService" ref="cmsTopicImpl" timeout="10000"/>
+
+    <!-- 菜单 -->
+    <bean id="cmsMenuImpl" class="com.zheng.cms.rpc.service.impl.CmsMenuServiceImpl"/>
+    <dubbo:service interface="com.zheng.cms.rpc.api.CmsMenuService" ref="cmsMenuImpl" timeout="10000"/>
+
+    <!-- 单页 -->
+    <bean id="cmsPageImpl" class="com.zheng.cms.rpc.service.impl.CmsPageServiceImpl"/>
+    <dubbo:service interface="com.zheng.cms.rpc.api.CmsPageService" ref="cmsPageImpl" timeout="10000"/>
+
+    <!-- 设置 -->
+    <bean id="cmsSettingImpl" class="com.zheng.cms.rpc.service.impl.CmsSettingServiceImpl"/>
+    <dubbo:service interface="com.zheng.cms.rpc.api.CmsSettingService" ref="cmsSettingImpl" timeout="10000"/>
 
     <!-- 用户 -->
     <bean id="userServiceImpl" class="com.zheng.cms.rpc.service.impl.UserServiceImpl"/>

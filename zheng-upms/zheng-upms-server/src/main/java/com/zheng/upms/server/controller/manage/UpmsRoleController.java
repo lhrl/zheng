@@ -53,7 +53,7 @@ public class UpmsRoleController extends BaseController {
     @RequiresPermissions("upms:role:read")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "/manage/role/index";
+        return "/manage/role/index.jsp";
     }
 
     @ApiOperation(value = "角色权限")
@@ -62,7 +62,7 @@ public class UpmsRoleController extends BaseController {
     public String permission(@PathVariable("id") int id, ModelMap modelMap) {
         UpmsRole role = upmsRoleService.selectByPrimaryKey(id);
         modelMap.put("role", role);
-        return "/manage/role/permission";
+        return "/manage/role/permission.jsp";
     }
 
     @ApiOperation(value = "角色权限")
@@ -99,6 +99,7 @@ public class UpmsRoleController extends BaseController {
     public Object list(
             @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
             @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+            @RequestParam(required = false, defaultValue = "", value = "search") String search,
             @RequestParam(required = false, value = "sort") String sort,
             @RequestParam(required = false, value = "order") String order) {
         UpmsRoleExample upmsRoleExample = new UpmsRoleExample();
@@ -106,6 +107,10 @@ public class UpmsRoleController extends BaseController {
         upmsRoleExample.setLimit(limit);
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
             upmsRoleExample.setOrderByClause(sort + " " + order);
+        }
+        if (StringUtils.isNotBlank(search)) {
+            upmsRoleExample.or()
+                    .andTitleLike("%" + search + "%");
         }
         List<UpmsRole> rows = upmsRoleService.selectByExample(upmsRoleExample);
         long total = upmsRoleService.countByExample(upmsRoleExample);
@@ -119,7 +124,7 @@ public class UpmsRoleController extends BaseController {
     @RequiresPermissions("upms:role:create")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create() {
-        return "/manage/role/create";
+        return "/manage/role/create.jsp";
     }
 
     @ApiOperation(value = "新增角色")
@@ -157,7 +162,7 @@ public class UpmsRoleController extends BaseController {
     public String update(@PathVariable("id") int id, ModelMap modelMap) {
         UpmsRole role = upmsRoleService.selectByPrimaryKey(id);
         modelMap.put("role", role);
-        return "/manage/role/update";
+        return "/manage/role/update.jsp";
     }
 
     @ApiOperation(value = "修改角色")

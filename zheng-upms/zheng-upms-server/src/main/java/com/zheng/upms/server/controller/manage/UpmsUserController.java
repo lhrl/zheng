@@ -62,7 +62,7 @@ public class UpmsUserController extends BaseController {
     @RequiresPermissions("upms:user:read")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "/manage/user/index";
+        return "/manage/user/index.jsp";
     }
 
     @ApiOperation(value = "用户组织")
@@ -78,7 +78,7 @@ public class UpmsUserController extends BaseController {
         List<UpmsUserOrganization> upmsUserOrganizations = upmsUserOrganizationService.selectByExample(upmsUserOrganizationExample);
         modelMap.put("upmsOrganizations", upmsOrganizations);
         modelMap.put("upmsUserOrganizations", upmsUserOrganizations);
-        return "/manage/user/organization";
+        return "/manage/user/organization.jsp";
     }
 
     @ApiOperation(value = "用户组织")
@@ -120,7 +120,7 @@ public class UpmsUserController extends BaseController {
         List<UpmsUserRole> upmsUserRoles = upmsUserRoleService.selectByExample(upmsUserRoleExample);
         modelMap.put("upmsRoles", upmsRoles);
         modelMap.put("upmsUserRoles", upmsUserRoles);
-        return "/manage/user/role";
+        return "/manage/user/role.jsp";
     }
 
     @ApiOperation(value = "用户角色")
@@ -156,6 +156,7 @@ public class UpmsUserController extends BaseController {
     public Object list(
             @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
             @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+            @RequestParam(required = false, defaultValue = "", value = "search") String search,
             @RequestParam(required = false, value = "sort") String sort,
             @RequestParam(required = false, value = "order") String order) {
         UpmsUserExample upmsUserExample = new UpmsUserExample();
@@ -163,6 +164,12 @@ public class UpmsUserController extends BaseController {
         upmsUserExample.setLimit(limit);
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
             upmsUserExample.setOrderByClause(sort + " " + order);
+        }
+        if (StringUtils.isNotBlank(search)) {
+            upmsUserExample.or()
+                    .andRealnameLike("%" + search + "%");
+            upmsUserExample.or()
+                    .andUsernameLike("%" + search + "%");
         }
         List<UpmsUser> rows = upmsUserService.selectByExample(upmsUserExample);
         long total = upmsUserService.countByExample(upmsUserExample);
@@ -176,7 +183,7 @@ public class UpmsUserController extends BaseController {
     @RequiresPermissions("upms:user:create")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create() {
-        return "/manage/user/create";
+        return "/manage/user/create.jsp";
     }
 
     @ApiOperation(value = "新增用户")
@@ -217,7 +224,7 @@ public class UpmsUserController extends BaseController {
     public String update(@PathVariable("id") int id, ModelMap modelMap) {
         UpmsUser user = upmsUserService.selectByPrimaryKey(id);
         modelMap.put("user", user);
-        return "/manage/user/update";
+        return "/manage/user/update.jsp";
     }
 
     @ApiOperation(value = "修改用户")

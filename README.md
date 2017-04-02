@@ -1,34 +1,36 @@
 # zheng
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/shuzheng/zheng/pulls)
+[![GitHub stars](https://img.shields.io/github/stars/shuzheng/zheng.svg?style=social&label=Stars)](https://github.com/shuzheng/zheng)
 [![GitHub forks](https://img.shields.io/github/forks/shuzheng/zheng.svg?style=social&label=Fork)](https://github.com/shuzheng/zheng)
 
-交流QQ群：133107819🈵、284280411♨️(群内含各种工具和文档下载)
+交流QQ群：133107819🈵、284280411🈵、528049386🈵、305155242♨️(群内含各种工具和文档下载)
 
 ## 前言
 
-　　`zheng`项目创建于2016年10月4日，正在慢慢成长中，目的不仅仅是一个开发架构，而是努力打造一套从 **前端UI** - **基础框架** - **分布式架构** - **开源项目** - **持续集成** - **自动化部署** - **系统监测** - **无缝升级** 的全方位J2EE企业级开发解决方案。
+　　`zheng`项目创建于2016年10月4日，正在慢慢成长中，目的不仅仅是一个开发架构，而是努力打造一套从 **前端模板** - **基础框架** - **分布式架构** - **开源项目** - **持续集成** - **自动化部署** - **系统监测** - **无缝升级** 的全方位J2EE企业级开发解决方案。
 
 ## 项目介绍
 
-基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构：内容管理系统（门户、博客、论坛、问答等）、统一支付中心（微信、支付宝、在线网银等）、用户权限管理系统（RBAC细粒度用户权限、统一后台、单点登录、会话管理）、微信管理系统、第三方登录系统、会员系统、存储系统等，努力为中小型企业打造全方位J2EE企业级开发解决方案。
+　　基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：内容管理、支付中心、用户管理（包括第三方）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。
 
 ### 组织结构
 
 ``` lua
 zheng
 ├── zheng-common -- SSM框架公共模块
-├── zheng-ui -- 后台管理系统UI模板（基于bootstrap实现的响应式Material Design风格的通用后台管理系统模板）
-├── zheng-upms -- 用户权限管理系统（网关）
+├── zheng-admin -- 后台管理模板
+├── zheng-ui -- 前台thymeleaf模板[端口:1000]
+├── zheng-upms -- 用户权限管理系统
 |    ├── zheng-upms-common -- upms系统公共模块
-|    ├── zheng-upms-dao -- MyBatisGenerator代码生成模块，无需开发
+|    ├── zheng-upms-dao -- 代码生成模块，无需开发
 |    ├── zheng-upms-client -- 集成upms依赖包，提供单点认证、授权、统一会话管理
 |    ├── zheng-upms-rpc-api -- rpc接口包
 |    ├── zheng-upms-rpc-service -- rpc服务提供者
 |    └── zheng-upms-server -- 用户权限系统及SSO服务端[端口:1111]
 ├── zheng-cms -- 内容管理系统
 |    ├── zheng-cms-common -- cms系统公共模块
-|    ├── zheng-cms-dao -- MyBatisGenerator代码生成模块，无需开发
+|    ├── zheng-cms-dao -- 代码生成模块，无需开发
 |    ├── zheng-cms-rpc-api -- rpc接口包
 |    ├── zheng-cms-rpc-service -- rpc服务提供者
 |    ├── zheng-cms-search -- 搜索服务[端口:2221]
@@ -36,18 +38,20 @@ zheng
 |    ├── zheng-cms-job -- 消息队列、任务调度等[端口:2223]
 |    └── zheng-cms-web -- 网站前台[端口:2224]
 ├── zheng-pay -- 支付系统
-|    ├── zheng-pay-dao -- MyBatisGenerator代码生成模块，无需开发
-|    ├── zheng-pay-service -- 业务逻辑
+|    ├── zheng-pay-common -- pay系统公共模块
+|    ├── zheng-pay-dao -- 代码生成模块，无需开发
+|    ├── zheng-pay-rpc-api -- rpc接口包
+|    ├── zheng-pay-rpc-service -- rpc服务提供者
 |    ├── zheng-pay-sdk -- 开发工具包
 |    ├── zheng-pay-admin -- 后台管理[端口:3331]
 |    └── zheng-pay-web -- 演示示例[端口:3332]
 ├── zheng-ucenter -- 用户系统(包括第三方登录)
-|    ├── zheng-ucenter-dao -- MyBatisGenerator代码生成模块，无需开发
+|    ├── zheng-ucenter-dao -- 代码生成模块，无需开发
 |    ├── zheng-ucenter-service -- 业务逻辑
 |    └── zheng-ucenter-home -- 网站前台[端口:4441]
 ├── zheng-wechat -- 微信系统
 |    ├── zheng-wechat-mp -- 微信公众号管理系统
-|    |    ├── zheng-wechat-mp-dao -- MyBatisGenerator代码生成模块，无需开发
+|    |    ├── zheng-wechat-mp-dao -- 代码生成模块，无需开发
 |    |    ├── zheng-wechat-mp-service -- 业务逻辑
 |    |    └── zheng-wechat-mp-admin -- 后台管理[端口:5551]
 |    └── zheng-ucenter-app -- 微信小程序后台
@@ -56,61 +60,71 @@ zheng
 |    ├── zheng-api-rpc-api -- rpc接口包
 |    ├── zheng-api-rpc-service -- rpc服务提供者
 |    └── zheng-api-server -- api系统服务端[端口:6666]
+├── zheng-oss -- 对象存储系统
+|    ├── zheng-oss-sdk -- 开发工具包
+|    └── zheng-oss-web -- 管理界面[端口:7771]
 ├── zheng-shop -- 电子商务系统
 ├── zheng-im -- 即时通讯系统
 ├── zheng-oa -- 办公自动化系统
 ├── zheng-eoms -- 运维系统
-└── zheng-oss -- 对象存储系统
-     ├── zheng-oss-sdk -- 开发工具包
-     └── zheng-oss-web -- 管理界面[端口:7771]
+└── zheng-demo -- 示例模块(包含一些示例代码等)
+     ├── zheng-demo-rpc-api -- rpc接口包
+     ├── zheng-demo-rpc-service -- rpc服务提供者
+     └── zheng-demo-web -- 演示示例[端口:8888]
 ```
 
 ### 技术选型
 
 #### 后端技术:
-- Spring Framework
-- SpringMVC: MVC框架
-- Spring secutity|Apache Shiro: 安全框架
-- Spring session: 分布式Session管理
-- MyBatis: ORM框架
-- MyBatis Generator: 代码生成
-- Druid: 数据库连接池
-- FluentValidator： 校验框架 [https://github.com/neoremind/fluent-validator](https://github.com/neoremind/fluent-validator "FluentValidator")
-- Jsp|Velocity|Thymeleaf: 模板引擎
-- ZooKeeper: 分布式协调服务
-- Dubbo: 分布式服务框架
-- TBSchedule|elastic-job: 分布式调度框架
-- Redis: 分布式缓存数据库
-- Solr|Elasticsearch: 分布式全文搜索引擎
-- Quartz: 作业调度框架
-- Ehcache: 进程内缓存框架
-- ActiveMQ: 消息队列
-- JStorm: 实时流式计算框架
-- FastDFS: 分布式文件系统
-- Log4J: 日志管理
-- Swagger2: 接口测试框架
-- sequence: 分布式高效ID生产 [http://git.oschina.net/yu120/sequence](http://git.oschina.net/yu120/sequence "sequence")
-- AliOSS|Qiniu|QcloudCOS: 云存储
-- Protobuf|json: 数据传输 
-- Jenkins: 持续集成工具
-- Maven: 项目构建管理
+- Spring Framework [http://projects.spring.io/spring-framework/](http://projects.spring.io/spring-framework/)
+- SpringMVC: MVC框架 [http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc)
+- Spring secutity: 安全框架 [http://projects.spring.io/spring-security/](http://projects.spring.io/spring-security/)
+- Apache Shiro: 安全框架 [http://shiro.apache.org/](http://shiro.apache.org/)
+- Spring session: 分布式Session管理 [http://projects.spring.io/spring-session/](http://projects.spring.io/spring-session/)
+- MyBatis: ORM框架 [http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)
+- MyBatis Generator: 代码生成 [http://www.mybatis.org/generator/index.html](http://www.mybatis.org/generator/index.html)
+- Druid: 数据库连接池 [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
+- FluentValidator： 校验框架 [https://github.com/neoremind/fluent-validator](https://github.com/neoremind/fluent-validator)
+- Jsp|Thymeleaf: 模板引擎 [http://www.thymeleaf.org/](http://www.thymeleaf.org/)
+- Velocity [http://velocity.apache.org/](http://velocity.apache.org/)
+- ZooKeeper: 分布式协调服务 [http://zookeeper.apache.org/](http://zookeeper.apache.org/)
+- Dubbo: 分布式服务框架 [http://dubbo.io/](http://dubbo.io/)
+- TBSchedule|elastic-job: 分布式调度框架 [https://github.com/dangdangdotcom/elastic-job](https://github.com/dangdangdotcom/elastic-job)
+- Redis: 分布式缓存数据库 [https://redis.io/](https://redis.io/)
+- Solr|Elasticsearch: 分布式全文搜索引擎 [http://lucene.apache.org/solr/](http://lucene.apache.org/solr/) [https://www.elastic.co/](https://www.elastic.co/)
+- Quartz: 作业调度框架 [http://www.quartz-scheduler.org/](http://www.quartz-scheduler.org/)
+- Ehcache: 进程内缓存框架 [http://www.ehcache.org/](http://www.ehcache.org/)
+- ActiveMQ: 消息队列 [http://activemq.apache.org/](http://activemq.apache.org/)
+- JStorm: 实时流式计算框架 [http://jstorm.io/](http://jstorm.io/)
+- FastDFS: 分布式文件系统 [https://github.com/happyfish100/fastdfs](https://github.com/happyfish100/fastdfs)
+- Log4J: 日志管理 [http://logging.apache.org/log4j/1.2/](http://logging.apache.org/log4j/1.2/)
+- Swagger2: 接口测试框架 [http://swagger.io/](http://swagger.io/)
+- sequence: 分布式高效ID生产 [http://git.oschina.net/yu120/sequence](http://git.oschina.net/yu120/sequence)
+- AliOSS|Qiniu|QcloudCOS: 云存储 [https://www.aliyun.com/product/oss/](https://www.aliyun.com/product/oss/) [http://www.qiniu.com/](http://www.qiniu.com/) [https://www.qcloud.com/product/cos](https://www.qcloud.com/product/cos)
+- Protobuf|json: 数据传输 [https://github.com/google/protobuf](https://github.com/google/protobuf)
+- Jenkins: 持续集成工具 [https://jenkins.io/index.html](https://jenkins.io/index.html)
+- Maven: 项目构建管理 [http://maven.apache.org/](http://maven.apache.org/)
 
 #### 前端技术:
-- jQuery
-- Bootstrap
-- Bootstrap-table
-- Font-awesome
-- Waves
-- zTree
-- Select2
-- jquery-confirm
-- jQuery EasyUI
-- React
-- Editor.md [Github](https://github.com/pandao/editor.md "Github")
+- jQuery: 代码库 [http://jquery.com/](http://jquery.com/)
+- Bootstrap: 前端框架 [http://getbootstrap.com/](http://getbootstrap.com/)
+- Bootstrap-table Bootstrap数据表格 [http://bootstrap-table.wenzhixin.net.cn/](http://bootstrap-table.wenzhixin.net.cn/)
+- Font-awesome: 字体图标 [http://fontawesome.io/](http://fontawesome.io/)
+- Waves: 点击效果插件 [https://github.com/fians/Waves](https://github.com/fians/Waves)
+- zTree: 树插件 [http://www.treejs.cn/v3/](http://www.treejs.cn/v3/)
+- Select2: 选择框插件 [https://github.com/select2/select2](https://github.com/select2/select2)
+- jquery-confirm: 对话框 [https://github.com/craftpip/jquery-confirm](https://github.com/craftpip/jquery-confirm)
+- jQuery EasyUI: 基于jQuery的UI插件集合体 [http://www.jeasyui.com](http://www.jeasyui.com)
+- React: 界面构建框架 [https://github.com/facebook/react])(https://github.com/facebook/react)
+- Editor.md [Markdown编辑器](https://github.com/pandao/editor.md)
 - zhengAdmin [基于bootstrap实现的响应式Material Design风格的通用后台管理系统](https://github.com/shuzheng/zhengAdmin "zhengAdmin")
 - autoMail [邮箱地址自动补全插件](https://github.com/shuzheng/autoMail "autoMail")
 - zheng.jprogress.js [一款模仿youtube加载进度条插件](https://github.com/shuzheng/zheng.jprogress.js "zheng.jprogress.js")
 - zheng.jtotop.js [返回顶部插件(可以任意速度滑动到指定任意位置)](https://github.com/shuzheng/zheng.jtotop.js "zheng.jtotop.js")
+
+#### 架构图
+
+![架构图](project-bootstrap/architect.png)
 
 #### 模块依赖
 
@@ -122,23 +136,17 @@ zheng
 
 Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisGenerator扩展插件、通用BaseService、工具类等。
 
+> zheng-admin
+
+基于bootstrap实现的响应式Material Design风格的通用后台管理系统，`zheng`项目所有后台系统都是使用该模块界面作为前端展示。
+
 > zheng-ui
 
-基于bootstrap实现的响应式Material Design风格的通用后台管理系统，`zheng`项目所有系统都是使用该模块界面作为前端展示。
+各个子系统前台thymeleaf模板，前端资源模块，使用nginx代理，实现动静分离。
 
 > zheng-upms
 
 本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。
-
-**系统功能概述：**
-
-- 系统组织管理：系统和组织增加、删除、修改、查询功能。
-- 用户角色管理：用户和角色增加、删除、修改、查询功能。
-- 资源权限管理：资源和权限增加、删除、修改、查询功能。
-- 权限分配管理：提供给角色和用户的权限增加、删除、修改、查询功能。
-- 单点登录(SSO)：提供统一用户单点登录认证、用户鉴权功能。
-- 用户会话管理：提供分布式用户会话管理
-- 操作日志管理：提供记录用户登录、操作等日志。
 
 > zheng-oss
 
@@ -208,7 +216,6 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - Navicat for MySQL: 数据库客户端
 
 #### 开发环境：
-
 - Jdk7
 - Mysql5.5
 - Redis
@@ -229,6 +236,7 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 - ZooKeeper [http://www.apache.org/dyn/closer.cgi/zookeeper/](http://www.apache.org/dyn/closer.cgi/zookeeper/ "ZooKeeper")
 - Dubbo [http://dubbo.io/Download-zh.htm](http://dubbo.io/Download-zh.htm "Dubbo")
 - Elastic Stack [https://www.elastic.co/downloads](https://www.elastic.co/downloads "Elastic Stack")
+- Nginx [http://nginx.org/en/download.html](http://nginx.org/en/download.html "Nginx")
 - Jenkins [http://updates.jenkins-ci.org/download/war/](http://updates.jenkins-ci.org/download/war/ "Jenkins")
 - dubbo-admin-2.5.3 [http://download.csdn.net/detail/shuzheng5201314/9733652](http://download.csdn.net/detail/shuzheng5201314/9733652 "dubbo-admin-2.5.3")
 - dubbo-admin-2.5.4-SNAPSHOT-jdk8 [http://download.csdn.net/detail/shuzheng5201314/9733657](http://download.csdn.net/detail/shuzheng5201314/9733657 "dubbo-admin-2.5.4-SNAPSHOT-jdk8")
@@ -236,11 +244,12 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 ## 开发指南:
 
-- 1、本机安装Jdk7、Mysql、Redis、Zookeeper、ActiveMQ并启动相关服务，使用默认配置默认端口即可
+- 1、本机安装Jdk7、Mysql、Redis、Zookeeper、ActiveMQ并**启动相关服务**，使用默认配置默认端口即可
 - 2、克隆源代码到本地并打开，**推荐使用IntelliJ IDEA**，本地编译并安装到本地maven仓库
 
 ### 修改本地Host
 
+- 127.0.0.1	ui.zhangshuzheng.cn
 - 127.0.0.1	upms.zhangshuzheng.cn
 - 127.0.0.1	cms.zhangshuzheng.cn
 - 127.0.0.1	pay.zhangshuzheng.cn
@@ -251,42 +260,56 @@ Spring+SpringMVC+Mybatis框架集成公共模块，包括公共配置、MybatisG
 
 ### 编译流程
 
-zheng-ui、zheng-common => zheng-upms => 其他
+zheng-admin、zheng-common => zheng-upms => 其他
 
-### 启动顺序
-
+### 启动顺序（后台）
+```
 - 新建zheng数据库，导入project-bootstrap文件夹下的zheng-xxx.sql（使用最新版）
 
 - 修改各dao模块和rpc-service模块的redis.properties、jdbc.properties、generator.properties数据库连接等配置信息，其中master.redis.password、master.jdbc.password、slave.jdbc.password、generator.jdbc.password密码值使用了AES加密，请使用com.zheng.common.util.AESUtil工具类修改这些值
 
 - 首先启动 zheng-upms-rpc-service(直接运行src目录下的ZhengUpmsRpcServiceApplication#main方法启动) => zheng-upms-server(jetty)，然后按需启动对应子系统xxx的zheng-xxx-rpc-service(main方法) => zheng-xxx-webapp(jetty)
-
-![rpc-service启动演示](project-bootstrap/start_rpc.png)
-
-![web启动演示](project-bootstrap/start_web.png)
-
-- 访问 [统一后台地址 http://upms.zhangshuzheng.cn:1111/ ](http://upms.zhangshuzheng.cn:1111/ "统一后台地址")，子系统菜单已经配置到zheng-upms权限中，不用直接访问子系统，默认帐号密码：admin/123456
+```
+![rpc-service启动演示](project-bootstrap/start_rpc.png) ![web启动演示](project-bootstrap/start_web.png)
+```
+- 访问 [统一后台地址 http://upms.zhangshuzheng.cn:1111/]，子系统菜单已经配置到zheng-upms权限中，不用直接访问子系统，默认帐号密码：admin/123456
 
 - 登录成功后，可在右上角切换已注册系统访问
+```
+
+### 启动顺序（前台）
+
+```
+- 启动nginx代理zheng-ui静态资源，配置文件可参考 [nginx.conf](http://git.oschina.net/shuzheng/zheng/attach_files)
+
+- 启动前台系统应用服务器
+```
 
 ### 开发演示
 
+```
 - 创建数据表（建议使用PowerDesigner）
 
 - 直接运行对应项目dao模块中的generator.main()，可自动生成单表的CRUD功能和对应的model、example、mapper、service代码
 
     - 生成的model和example均已实现Serializable接口，支持分布式
+    
     - 生成的mapper.xml的selectByExample方法自动包含分页参数offset和limit
+
     - 已包含抽象类BaseServiceImpl，只需要继承抽象类并传入泛型参数，即可默认实现mapper接口所有方法，特殊需求直接扩展即可
+
     - BaseServiceImpl方法根据读写操作自动切换主从数据源，继承的扩展接口，可手动通过`DynamicDataSource.setDataSource(DataSourceEnum.XXX.getName())`指定数据源
 
 - 启动流程：优先rcp-service服务提供者，再启动其他webapp
 
 - 扩展流程：可扩展和拆分rpc-api和rpc-service模块，可按微服务拆分或场景拆分
+```
 
 ### 框架规范约定
 
-`约定优于配置(convention over configuration)`，此框架约定了很多编程规范，下面一一列举：
+约定优于配置(convention over configuration)，此框架约定了很多编程规范，下面一一列举：
+
+```
 
 - service类，需要在叫名`service`的包下，并以`Service`结尾，如`CmsArticleServiceImpl`
 
@@ -322,15 +345,17 @@ zheng-ui、zheng-common => zheng-upms => 其他
 
 - 更多规范，参考[[阿里巴巴Java开发手册](http://git.oschina.net/shuzheng/zheng/attach_files "Alibaba Java Development Manual.pdf")]
 
+```
 
 ## 演示地址
 
 演示地址： [http://www.zhangshuzheng.cn/zhengAdmin](http://www.zhangshuzheng.cn/zhengAdmin "演示地址")
 
 ### 预览图
-![login](project-bootstrap/zheng-upms-login.png)
-![index](project-bootstrap/zheng-upms-index.png)
-![crud](zheng-ui/src/images/zheng-upms-theme.png)
+![idea](project-bootstrap/idea.png)
+![login](project-bootstrap/zheng-login.png)
+![upms](project-bootstrap/zheng-upms.png)
+![cms](project-bootstrap/zheng-cms.png)
 ![swagger](project-bootstrap/api.png)
 
 ### 数据模型
@@ -341,6 +366,22 @@ zheng-ui、zheng-common => zheng-upms => 其他
 
 ### 开发进度
 ![开发进度](project-bootstrap/progress.png)
+
+### 参与开发
+
+首先谢谢大家支持，如果你希望参与开发，欢迎通过[Github](https://github.com/shuzheng/zheng "Github")上fork本项目，并Pull Request您的commit。
+
+### 常见问题
+
+- Eclipse下，dubbo找不到dubbo.xsd报错，不影响使用，如果要解决，可参考 [http://blog.csdn.net/gjldwz/article/details/50555922](http://blog.csdn.net/gjldwz/article/details/50555922)
+
+- 报zheng-xxx.jar包找不到,请按照文档编译顺序，将源代码编译并安装到本地maven仓库
+
+- zheng-cms-admin启动卡住：因为没有启动activemq
+
+- zheng-upms-server访问报session不存在：因为没有启动redis服务
+
+- 界面没有样式：因为zheng-admin没有编译安装到本地仓库
 
 ## 附件
 
@@ -416,6 +457,8 @@ zheng-ui、zheng-common => zheng-upms => 其他
 - [Bootstrap在线手册](http://www.bootcss.com/ "Bootstrap在线手册")
 
 - [Git官网中文文档](https://git-scm.com/book/zh/v2 "Git官网中文文档")
+
+- [Thymeleaf](http://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html "Thymeleaf")
 
 ## 许可证
 

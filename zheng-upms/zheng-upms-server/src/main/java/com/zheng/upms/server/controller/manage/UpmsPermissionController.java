@@ -50,7 +50,7 @@ public class UpmsPermissionController extends BaseController {
     @RequiresPermissions("upms:permission:read")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "/manage/permission/index";
+        return "/manage/permission/index.jsp";
     }
 
     @ApiOperation(value = "权限列表")
@@ -60,6 +60,7 @@ public class UpmsPermissionController extends BaseController {
     public Object list(
             @RequestParam(required = false, defaultValue = "0", value = "offset") int offset,
             @RequestParam(required = false, defaultValue = "10", value = "limit") int limit,
+            @RequestParam(required = false, defaultValue = "", value = "search") String search,
             @RequestParam(required = false, defaultValue = "0", value = "type") int type,
             @RequestParam(required = false, defaultValue = "0", value = "systemId") int systemId,
             @RequestParam(required = false, value = "sort") String sort,
@@ -76,6 +77,10 @@ public class UpmsPermissionController extends BaseController {
         upmsPermissionExample.setLimit(limit);
         if (!StringUtils.isBlank(sort) && !StringUtils.isBlank(order)) {
             upmsPermissionExample.setOrderByClause(sort + " " + order);
+        }
+        if (StringUtils.isNotBlank(search)) {
+            upmsPermissionExample.or()
+                    .andNameLike("%" + search + "%");
         }
         List<UpmsPermission> rows = upmsPermissionService.selectByExample(upmsPermissionExample);
         long total = upmsPermissionService.countByExample(upmsPermissionExample);
@@ -99,6 +104,7 @@ public class UpmsPermissionController extends BaseController {
         UpmsPermissionExample upmsPermissionExample = new UpmsPermissionExample();
         upmsPermissionExample.createCriteria()
             .andStatusEqualTo((byte) 1);
+        upmsPermissionExample.setOrderByClause("orders asc");
         List<UpmsPermission> permissions = upmsPermissionService.selectByExample(upmsPermissionExample);
         // 角色已有权限
         List<UpmsRolePermission> rolePermissions = upmsApiService.selectUpmsRolePermisstionByUpmsRoleId(id);
@@ -147,7 +153,7 @@ public class UpmsPermissionController extends BaseController {
                 .andStatusEqualTo((byte) 1);
         List<UpmsSystem> upmsSystems = upmsSystemService.selectByExample(upmsSystemExample);
         modelMap.put("upmsSystems", upmsSystems);
-        return "/manage/permission/create";
+        return "/manage/permission/create.jsp";
     }
 
     @ApiOperation(value = "新增权限")
@@ -189,7 +195,7 @@ public class UpmsPermissionController extends BaseController {
         UpmsPermission permission = upmsPermissionService.selectByPrimaryKey(id);
         modelMap.put("permission", permission);
         modelMap.put("upmsSystems", upmsSystems);
-        return "/manage/permission/update";
+        return "/manage/permission/update.jsp";
     }
 
     @ApiOperation(value = "修改权限")
